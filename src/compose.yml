@@ -11,4 +11,4 @@ services:
     sports:
         image: sergiobarriel/emoji-api-sports
         ports:
-            - "5001:80"            
+            - "5002:80"            
