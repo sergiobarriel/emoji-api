@@ -30,3 +30,7 @@ $ curl localhost:5001
 $ curl localhost:5002
 🏈
 ```
+
+## Support
+
+You can contact me via Twitter [@sergiobarriel](https://twitter.com/sergiobarriel), or if you have an [issue](https://github.com/sergiobarriel/emoji-api/issues), you can open one 🙂
