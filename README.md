@@ -20,7 +20,7 @@ $ docker run -p 5001:80 sergiobarriel/emoji-api-foods
 $ docker run -p 5002:80 sergiobarriel/emoji-api-sports
 ```
 
-Now, you can call the APIs on `localhost`
+Now, you can make requests to the APIs on `localhost`
 
 ```shell
 $ curl localhost:5000
@@ -31,7 +31,7 @@ $ curl localhost:5002
 🏈
 ```
 
-If you clone the repo, you can spin up the three APIs at the same time with *Docker Compose*
+If you clone the repo, you can spin up the APIs at the same time with *Docker Compose*
 
 ```shell
 $ docker compose up
@@ -40,7 +40,7 @@ animals-1  | 🦀 running on port 80
 foods-1    | 🍜 running on port 80
 ```
 
-The you can make requests across all APIs by using `jump` endpoint and DNS names for each container:
+Then you can make requests across all APIs by using `jump` endpoint and DNS names for each container:
 
 ```shell
 $ curl localhost:5000/jump?url=http://foods/jump?url=http://sports
