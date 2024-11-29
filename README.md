@@ -31,6 +31,22 @@ $ curl localhost:5002
 🏈
 ```
 
+If you clone the repo, you can spin up the three APIs at the same time with *Docker Compose*
+
+```shell
+$ docker compose up
+sports-1   | 🏓 running on port 80
+animals-1  | 🦀 running on port 80
+foods-1    | 🍜 running on port 80
+```
+
+The you can make requests across all APIs by using `jump` endpoint and DNS names for each container:
+
+```shell
+$ curl localhost:5000/jump?url=http://foods/jump?url=http://sports
+🐖 🍔 🏈
+```
+
 ## Support
 
 You can contact me via Twitter [@sergiobarriel](https://twitter.com/sergiobarriel), or if you have an [issue](https://github.com/sergiobarriel/emoji-api/issues), you can open one 🙂
