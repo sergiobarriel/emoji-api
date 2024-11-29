@@ -1,4 +1,4 @@
-# 🐖 Emoji API
+# 🐒 Emoji API
 
 A lightweight Node.js apps collection using Express to create a simple greeting APIs with random emojis. Designed for learning Docker.
 
