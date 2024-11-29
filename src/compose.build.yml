@@ -1,0 +1,24 @@
+services:
+    animals:
+        image: sergiobarriel/emoji-api-animals
+        ports:
+            - 5000:80
+        build:
+            dockerfile: Dockerfile
+            context: ./animals
+
+    foods:
+        image: sergiobarriel/emoji-api-foods
+        ports:
+            - 5001:80
+        build:
+            dockerfile: Dockerfile
+            context: ./foods
+
+    sports:
+        image: sergiobarriel/emoji-api-sports
+        ports:
+            - 5001:80
+        build:
+            dockerfile: Dockerfile
+            context: ./sports            

@@ -1,0 +1,50 @@
+name: '🐋 docker'
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v4
+    - name: '🐋 build Docker image'
+      working-directory: ./src/animals
+      run: docker build -t ${{ vars.DOCKER_HUB_USERNAME }}/emoji-api-animals .
+
+    - name: '🐋 log in to Docker Hub'
+      run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ vars.DOCKER_HUB_USERNAME }} --password-stdin      
+      
+    - name: '🐋 push image to Docker Hub'
+      run: docker push ${{ vars.DOCKER_HUB_USERNAME }}/emoji-api-animals
+
+
+    - uses: actions/checkout@v4
+    - name: '🐋 build Docker image'
+      working-directory: ./src/foods
+      run: docker build -t ${{ vars.DOCKER_HUB_USERNAME }}/emoji-api-foods .
+
+    - name: '🐋 log in to Docker Hub'
+      run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ vars.DOCKER_HUB_USERNAME }} --password-stdin      
+      
+    - name: '🐋 push image to Docker Hub'
+      run: docker push ${{ vars.DOCKER_HUB_USERNAME }}/emoji-api-foods
+
+
+    - uses: actions/checkout@v4
+    - name: '🐋 build Docker image'
+      working-directory: ./src/sports
+      run: docker build -t ${{ vars.DOCKER_HUB_USERNAME }}/emoji-api-sports .
+
+    - name: '🐋 log in to Docker Hub'
+      run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ vars.DOCKER_HUB_USERNAME }} --password-stdin      
+      
+    - name: '🐋 push image to Docker Hub'
+      run: docker push ${{ vars.DOCKER_HUB_USERNAME }}/emoji-api-sports      
