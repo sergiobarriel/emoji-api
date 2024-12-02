@@ -1,6 +1,6 @@
 # 🐒 Emoji API
 
-A lightweight APIs with funny emojis. Designed for learning **Docker**.
+A lightweight [animals](https://hub.docker.com/repository/docker/sergiobarriel/emoji-api-animals/general), [foods](https://hub.docker.com/repository/docker/sergiobarriel/emoji-api-foods/general) & [sports](https://hub.docker.com/repository/docker/sergiobarriel/emoji-api-sports/general) APIs with funny emojis. Designed for learning 🐋 **Docker**.
 
 ## Usage
 
