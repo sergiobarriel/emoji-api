@@ -15,19 +15,19 @@ $ docker pull sergiobarriel/emoji-api-sports
 Run them:
 
 ```shell
-$ docker run -p 5000:80 sergiobarriel/emoji-api-animals
-$ docker run -p 5001:80 sergiobarriel/emoji-api-foods
-$ docker run -p 5002:80 sergiobarriel/emoji-api-sports
+$ docker run -p 5001:80 sergiobarriel/emoji-api-animals
+$ docker run -p 5002:80 sergiobarriel/emoji-api-foods
+$ docker run -p 5003:80 sergiobarriel/emoji-api-sports
 ```
 
 Now, you can make requests to the APIs on `localhost`
 
 ```shell
-$ curl localhost:5000
-🐖
 $ curl localhost:5001
-🍔
+🐖
 $ curl localhost:5002
+🍔
+$ curl localhost:5003
 🏈
 ```
 
@@ -35,41 +35,40 @@ If you clone the repository, you can spin up all the APIs at the same time using
 
 ```shell
 $ docker compose up
-animals-1  | 🐖 running on port 80
-foods-1    | 🍔 running on port 80
-sports-1   | 🏈 running on port 80
+orchestrator-1 | 🎶 running on port 80
+animals-1      | 🐖 running on port 80
+foods-1        | 🍔 running on port 80
+sports-1       | 🏈 running on port 80
 ```
 
-As in the previous example, you can make calls to each API from the *host* using their respective URIs
+When using Docker Compose, a new application named *orchestrator* will be launched. This application leverages environment variables and internal DNS to communicate with other APIs
 
-```shell
+In the provided [compose.yml]() file, you can see an environment block that defines several variables, which are passed directly to the container.
+              
+```yml
+services:
+
+    orchestrator:
+        image: orchestrator
+        ports:
+            - "5000:80"
+        environment:
+            - ANIMALS_URL=http://animals:80
+            - FOODS_URL=http://foods:80
+            - SPORTS_URL=http://sports:80
+            - ENVIRONMENT=dev
+
+    # ...
+    # ...
+```
+
+These environment variables can then be accessed by the application using the method `Environment.GetEnvironmentVariable("ANIMALS_URL")`
+
+
+You can now make a request to `localhost:5000` and see the combined response from the other APIs.
+
+```
 $ curl localhost:5000
-🐖
-$ curl localhost:5001
-🍔
-$ curl localhost:5002
-🏈
-```
-
-But... what happens if you want to make calls from one API to another?
-
-![Docker Network](img/docker%20network.png)
-
-As shown in the diagram, Docker automatically creates a network, assigning an internal IP address and DNS name to each API.
-
-For example, from your *host* you can access the *animals* container using `localhost:5000`, but from inside the *animals* container, you cannot access the *foods* container using `localhost:5001`. Instead, you must use the internal IP address (e.g., http://172.18.0.3) or its DNS name (e.g., http://foods)
-
-Each API includes a route called `/jump`, which allows it to make an HTTP request to another URL via `/jump?url=http://www.example.com`
-
-You can use this method to enable communication between APIs:
-
-```shell
-$ curl localhost:5000/jump?url=http://172.18.0.2
-🐖 🐖 
-```
-
-```shell
-$ curl localhost:5000/jump?url=http://foods/jump?url=http://sports
 🐖 🍔 🏈
 ```
 

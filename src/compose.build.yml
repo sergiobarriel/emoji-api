@@ -1,8 +1,22 @@
 services:
+
+    orchestrator:
+        image: orchestrator
+        build: 
+            dockerfile: Dockerfile
+            context: ./orchestrator
+        ports:
+            - "5000:80"
+        environment:
+            - ANIMALS_URL=http://animals:80
+            - FOODS_URL=http://foods:80
+            - SPORTS_URL=http://sports:80
+            - ENVIRONMENT=dev
+
     animals:
         image: sergiobarriel/emoji-api-animals
         ports:
-            - 5000:80
+            - 5001:80
         build:
             dockerfile: Dockerfile
             context: ./animals
@@ -10,7 +24,7 @@ services:
     foods:
         image: sergiobarriel/emoji-api-foods
         ports:
-            - 5001:80
+            - 5002:80
         build:
             dockerfile: Dockerfile
             context: ./foods
@@ -18,7 +32,7 @@ services:
     sports:
         image: sergiobarriel/emoji-api-sports
         ports:
-            - 5002:80
+            - 5003:80
         build:
             dockerfile: Dockerfile
             context: ./sports            
