@@ -43,7 +43,7 @@ sports-1       | 🏈 running on port 80
 
 When using Docker Compose, a new application named *orchestrator* will be launched. This application leverages environment variables and internal DNS to communicate with other APIs
 
-In the provided [compose.yml]() file, you can see an environment block that defines several variables, which are passed directly to the container.
+In the provided [compose.yml](https://github.com/sergiobarriel/emoji-api/blob/main/src/compose.yml) file, you can see an environment block that defines several variables, which are passed directly to the container.
               
 ```yml
 services:
