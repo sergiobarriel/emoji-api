@@ -1,7 +1,7 @@
 services:
 
     orchestrator:
-        image: orchestrator
+        image: sergiobarriel/emoji-api-orchestrator
         build: 
             dockerfile: Dockerfile
             context: ./orchestrator
